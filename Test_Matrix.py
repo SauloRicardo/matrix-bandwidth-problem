@@ -9,6 +9,7 @@ row = np.array([0, 1, 2, 3, 0, 3, 2, 3])
 col = np.array([0, 1, 2, 3, 3, 0, 3, 2])
 data = np.array([1, 1, 1, 1, 1, 1, 1, 1])
 matrix = csr_matrix((data, (row, col)), shape=(4, 4))
+linha = matrix[3]
 print(bnb.bandwidth_bnb(matrix))
 
 # matrix = Auxiliary_Functions.swap_indices(0, 1, matrix)
