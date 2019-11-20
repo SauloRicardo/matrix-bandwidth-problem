@@ -1,17 +1,14 @@
 from scipy.sparse import csr_matrix
 
 
-def objective_function(matrix_fun):
+def objective_function_csr(matrix_fun=csr_matrix):
     bandwidth = 0
-    for row_for in range((int(matrix_fun.get_shape()[0])), 0, -1):
-        for col_for in range(row_for-1):
-            if row_for-1-col_for > bandwidth:
-                if(col_for == 0) or (col_for == 1):
-                    if matrix_fun[row_for-1, col_for] != 0:
-                        bandwidth = row_for-1-col_for
-                        return bandwidth
-                else:
-                    bandwidth = row_for-1-col_for
+    for row_for in range(0, (int(matrix_fun.get_shape()[0] - 1))):
+        indices_aux = list(matrix_fun[row_for].indices)
+        bandwidth_aux = int(indices_aux[len(indices_aux)-1]) - row_for
+        if bandwidth_aux > bandwidth:
+            bandwidth = bandwidth_aux
+
     return bandwidth
 
 
@@ -28,3 +25,19 @@ def swap_indices(ind1, ind2, matrix_fun):
                 matrix_fun.eliminate_zeros()
 
     return matrix_fun
+
+
+'''
+def objective_function(matrix_fun=csr_matrix):
+    bandwidth = 0
+    for row_for in range((int(matrix_fun.get_shape()[0]-1)), 0, -1):
+        for col_for in range(row_for):
+            if row_for-col_for > bandwidth:
+                if(col_for == 0) or (col_for == 1):
+                    if matrix_fun[row_for, col_for] != 0:
+                        bandwidth = row_for-col_for
+                        return bandwidth
+                else:
+                    bandwidth = row_for-col_for
+    return bandwidth
+'''
