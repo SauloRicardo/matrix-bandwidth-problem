@@ -9,9 +9,33 @@ def bandwidth_bnb(matrix=csr_matrix):
     matrix_aux = copy.deepcopy(matrix)
     upper_bound = Af.objective_function_csr(matrix)
     lower_bound = Af.simple_lower_bound(matrix)
-    while True:
-        if Af.objective_function_csr(matrix_aux) == lower_bound:
-            return matrix_aux
+    list_aux = list(range(0, matrix_aux.get_shape()[0]))
+    matrix_aux = recursive_bnb(list_aux, upper_bound, lower_bound, matrix_aux)
+    print(matrix_aux.toarray())
+
+
+def recursive_bnb(list_aux, upper_bound, lower_bound, matrix=csr_matrix):
+    if len(list_aux) == 1:
+        return matrix
+    for x in list_aux:
+        list_aux_copy = copy.deepcopy(list_aux)
+        row = list_aux_copy.pop(x)
+        # row = list_aux.pop()
+        for y in list_aux_copy:
+            matrix_aux = copy.deepcopy(Af.swap_indices(row, y, matrix))
+            possible_upper = Af.objective_function_csr(matrix_aux)
+            if possible_upper <= upper_bound:
+                upper_bound = possible_upper
+                if upper_bound == lower_bound:
+                    return matrix_aux
+                else:
+                    matrix_aux = recursive_bnb(list_aux_copy, upper_bound, lower_bound, matrix_aux)
+
+                possible_upper = Af.objective_function_csr(matrix_aux)
+                if possible_upper <= upper_bound:
+                    upper_bound = possible_upper
+                    if upper_bound == lower_bound:
+                        return matrix_aux
 
 # def bandwidth_bnb(matrix=csr_matrix):
 #     # bandwidth = Af.objective_function_csr(matrix)

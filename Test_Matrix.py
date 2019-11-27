@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.sparse import csr_matrix
+from scipy.sparse import csgraph
 from scipy.io import mmread
 import Auxiliary_Functions
 import Branch_and_Bound as bnb
@@ -11,13 +12,15 @@ import copy
 # data_full = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
 # dense_matrix = csr_matrix((data_full, (row_full, col_full)), shape=(5, 5))
 
-row = np.array([0, 1, 2, 3, 4, 4, 0])
-col = np.array([0, 1, 2, 3, 4, 0, 4])
-data = np.array([1, 1, 1, 1, 1, 1, 1])
+row = np.array([0, 1, 2, 3, 4, 4, 0, 0, 2])
+col = np.array([0, 1, 2, 3, 4, 0, 4, 2, 0])
+data = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1])
 matrix = csr_matrix((data, (row, col)), shape=(5, 5))
-# print(matrix.toarray())
+matrix_aux = Auxiliary_Functions.upper_bound_rcm(matrix)
+print(matrix_aux.toarray())
 
-matrix = Auxiliary_Functions.upper_bound_rcm(matrix)
+bnb.bandwidth_bnb(matrix)
+
 # print(Auxiliary_Functions.simple_lower_bound(matrix))
 
 # print(bnb.bandwidth_bnb(matrix).toarray())

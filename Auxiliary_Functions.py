@@ -14,6 +14,11 @@ def objective_function_csr(matrix_fun=csr_matrix):
     return bandwidth
 
 
+def bandwidth_row(row, matrix_fun=csr_matrix):
+    indices_aux = list(matrix_fun[row].indices)
+    return int(indices_aux[len(indices_aux) - 1]) - row
+
+
 def swap_indices(ind1, ind2, matrix_fun):
     for row_for in range((int(matrix_fun.get_shape()[0]))):
         if (row_for != ind1) and (row_for != ind2):
