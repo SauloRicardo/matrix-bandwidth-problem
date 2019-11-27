@@ -1,5 +1,5 @@
 from scipy.sparse import csr_matrix
-
+import copy
 
 def objective_function_csr(matrix_fun=csr_matrix):
     bandwidth = 0
@@ -26,6 +26,19 @@ def swap_indices(ind1, ind2, matrix_fun):
 
     return matrix_fun
 
+
+def swap_all_indices(list_aux, matrix=csr_matrix):
+    matrix_aux = copy.deepcopy(matrix)
+    print(list_aux)
+    cont = 0
+    swap_indices(4, 0, matrix_aux)
+    swap_indices(4, 1, matrix_aux)
+    swap_indices(4, 2, matrix_aux)
+    swap_indices(3, 3, matrix_aux)
+    swap_indices(4, 4, matrix_aux)
+
+    print(matrix_aux.toarray())
+    # return matrix_aux
 
 '''
 def objective_function(matrix_fun=csr_matrix):

@@ -5,6 +5,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/testesNiaPy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/testesNiaPy.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Auxiliary_Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Auxiliary_Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test_Matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_Matrix.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,7 +35,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -146,6 +147,7 @@
       <workItem from="1574259478705" duration="6775000" />
       <workItem from="1574276014675" duration="3675000" />
       <workItem from="1574622610608" duration="1136000" />
+      <workItem from="1574804378530" duration="5756000" />
     </task>
     <servers />
   </component>
@@ -184,8 +186,8 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/matrix_bandwidth_problem$soma_sequencia.coverage" NAME="soma_sequencia Coverage Results" MODIFIED="1573752832494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../.." />
-    <SUITE FILE_PATH="coverage/matrix_bandwidth_problem$testMatrix.coverage" NAME="testMatrix Coverage Results" MODIFIED="1574622879824" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/testesNiaPy$testMatrix.coverage" NAME="testMatrix Coverage Results" MODIFIED="1569449464758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/matrix_bandwidth_problem$testMatrix.coverage" NAME="testMatrix Coverage Results" MODIFIED="1574809983191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/matrix_bandwidth_problem$soma_sequencia.coverage" NAME="soma_sequencia Coverage Results" MODIFIED="1573752832494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../.." />
   </component>
 </project>
