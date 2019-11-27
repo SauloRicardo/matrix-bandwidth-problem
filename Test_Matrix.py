@@ -1,36 +1,26 @@
 import numpy as np
 from scipy.sparse import csr_matrix
-from scipy.sparse import csgraph
 from scipy.io import mmread
 import Auxiliary_Functions
 import Branch_and_Bound as bnb
-import tentativa
 import copy
 
 
-row = np.array([0, 1, 2, 3, 4, 1, 0, 4, 0])
-col = np.array([0, 1, 2, 3, 4, 0, 1, 0, 4])
-data = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1])
+# row_full = np.array([0, 1, 2, 3, 4, 0, 0, 0, 0, 1, 2, 3, 4, 1, 1, 1, 2, 3, 4, 2, 2, 3, 4, 3, 4])
+# col_full = np.array([0, 1, 2, 3, 4, 1, 2, 3, 4, 0, 0, 0, 0, 2, 3, 4, 1, 1, 1, 3, 4, 2, 2, 4, 3])
+# data_full = np.array([1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+# dense_matrix = csr_matrix((data_full, (row_full, col_full)), shape=(5, 5))
+
+row = np.array([0, 1, 2, 3, 4, 4, 0])
+col = np.array([0, 1, 2, 3, 4, 0, 4])
+data = np.array([1, 1, 1, 1, 1, 1, 1])
 matrix = csr_matrix((data, (row, col)), shape=(5, 5))
 # print(matrix.toarray())
-rcm = csgraph.reverse_cuthill_mckee(matrix, symmetric_mode=True)
 
-Auxiliary_Functions.swap_all_indices(rcm, matrix)
+matrix = Auxiliary_Functions.upper_bound_rcm(matrix)
+# print(Auxiliary_Functions.simple_lower_bound(matrix))
 
-# aux_swap = list(range(0, matrix.get_shape()[0]))
-# cont = 0
-
-# print(rcm)
-# for x in rcm:
-#     print(x, cont)
-#     print(aux_swap[x], aux_swap[cont])
-#     matrix = Auxiliary_Functions.swap_indices(aux_swap[x], aux_swap[cont], matrix)
-#     aux_swap[aux_swap.index(x)] = aux_swap[cont]
-#     aux_swap[cont] = x
-#     # aux_swap[x] = cont
-#     print(aux_swap)
-#
-#     cont += 1
+# print(bnb.bandwidth_bnb(matrix).toarray())
 
 # print(Auxiliary_Functions.objective_function_csr(matrix))
 # print(bnb.bandwidth_bnb(matrix).toarray())

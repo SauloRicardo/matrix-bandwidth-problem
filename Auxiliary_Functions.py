@@ -1,5 +1,7 @@
 from scipy.sparse import csr_matrix
 import copy
+from scipy.sparse import csgraph
+
 
 def objective_function_csr(matrix_fun=csr_matrix):
     bandwidth = 0
@@ -27,30 +29,42 @@ def swap_indices(ind1, ind2, matrix_fun):
     return matrix_fun
 
 
-def swap_all_indices(list_aux, matrix=csr_matrix):
+def upper_bound_rcm(matrix=csr_matrix):
+    rcm = csgraph.reverse_cuthill_mckee(matrix, symmetric_mode=True)
     matrix_aux = copy.deepcopy(matrix)
-    print(list_aux)
     cont = 0
-    swap_indices(4, 0, matrix_aux)
-    swap_indices(4, 1, matrix_aux)
-    swap_indices(4, 2, matrix_aux)
-    swap_indices(3, 3, matrix_aux)
-    swap_indices(4, 4, matrix_aux)
+    list_aux = list(range(0, len(rcm)))
+    rcm = list(rcm)
+    rcm.pop()
+    for x in rcm:
+        swap_indices(list_aux.index(x), list_aux.index(cont), matrix_aux)
+        list_aux[list_aux.index(x)], list_aux[list_aux.index(cont)] = \
+            list_aux[list_aux.index(cont)], list_aux[list_aux.index(x)]
+        cont += 1
 
-    print(matrix_aux.toarray())
-    # return matrix_aux
+    return matrix_aux
 
-'''
-def objective_function(matrix_fun=csr_matrix):
-    bandwidth = 0
-    for row_for in range((int(matrix_fun.get_shape()[0]-1)), 0, -1):
-        for col_for in range(row_for):
-            if row_for-col_for > bandwidth:
-                if(col_for == 0) or (col_for == 1):
-                    if matrix_fun[row_for, col_for] != 0:
-                        bandwidth = row_for-col_for
-                        return bandwidth
-                else:
-                    bandwidth = row_for-col_for
-    return bandwidth
-'''
+
+def simple_lower_bound(matrix=csr_matrix):
+    non_zero = int((matrix.getnnz() - matrix.get_shape()[0])/2)
+    cont = 0
+    # print(non_zero)
+    for x in range(matrix.get_shape()[0]-1, 0, -1):
+        cont += 1
+        non_zero -= x
+        if non_zero <= 0:
+            return cont
+    # return cont
+
+# def objective_function(matrix_fun=csr_matrix):
+#     bandwidth = 0
+#     for row_for in range((int(matrix_fun.get_shape()[0]-1)), 0, -1):
+#         for col_for in range(row_for):
+#             if row_for-col_for > bandwidth:
+#                 if(col_for == 0) or (col_for == 1):
+#                     if matrix_fun[row_for, col_for] != 0:
+#                         bandwidth = row_for-col_for
+#                         return bandwidth
+#                 else:
+#                     bandwidth = row_for-col_for
+#     return bandwidth
