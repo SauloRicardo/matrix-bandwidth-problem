@@ -2,40 +2,101 @@ import numpy as np
 from scipy.sparse import csr_matrix
 import Auxiliary_Functions as Af
 import copy
+import time
 
 
 def bandwidth_bnb(matrix=csr_matrix):
     # matrix_aux = copy.deepcopy(Af.upper_bound_rcm(matrix))
+    time_rec = time.time()
     matrix_aux = copy.deepcopy(matrix)
-    upper_bound = Af.objective_function_csr(matrix)
-    lower_bound = Af.simple_lower_bound(matrix)
+    upper_bound = Af.objective_function_csr(matrix_aux)
+    lower_bound = Af.simple_lower_bound(matrix_aux)
     list_aux = list(range(0, matrix_aux.get_shape()[0]))
-    matrix_aux = recursive_bnb(list_aux, upper_bound, lower_bound, matrix_aux)
-    print(matrix_aux.toarray())
+
+    possible_optimum_matrix = copy.deepcopy(matrix_aux)
+    # matrix_aux_rec = [(matrix_aux.get_shape()[0], matrix_aux.get_shape()[0]), int]
+    while len(list_aux) > 1:
+        matrix_aux_rec = recursive_bnb(list_aux, upper_bound, lower_bound, time_rec, matrix_aux)
+        possible_upper = Af.objective_function_csr(matrix_aux_rec)
+        if possible_upper < upper_bound:
+            possible_optimum_matrix = matrix_aux_rec
+            upper_bound = possible_upper
+            if upper_bound == lower_bound:
+                return matrix_aux_rec
+        list_aux.pop(0)
+
+        time_rec2 = time.time() - time_rec
+        print(time_rec2)
+        if time_rec2 >= 1800:
+            return possible_optimum_matrix
+
+    return possible_optimum_matrix
 
 
-def recursive_bnb(list_aux, upper_bound, lower_bound, matrix=csr_matrix):
-    if len(list_aux) == 1:
+def recursive_bnb(list_aux, upper_bound, lower_bound, time_rec, matrix=csr_matrix):
+    time_rec2 = time.time() - time_rec
+    if len(list_aux) == 1 or time_rec2 >= 1800:
         return matrix
-    for x in list_aux:
-        list_aux_copy = copy.deepcopy(list_aux)
-        row = list_aux_copy.pop(x)
-        # row = list_aux.pop()
-        for y in list_aux_copy:
-            matrix_aux = copy.deepcopy(Af.swap_indices(row, y, matrix))
+
+    row = list_aux[0]
+    list_aux_copy = copy.deepcopy(list_aux)
+    list_aux_copy.pop(0)
+    possible_optimum_matrix = copy.deepcopy(matrix)
+    for y in list_aux_copy:
+        time_rec2 = time.time() - time_rec
+        if time_rec2 >= 1800:
+            return possible_optimum_matrix
+        matrix_aux = copy.deepcopy(Af.swap_indices(row, y, matrix))
+        possible_upper = Af.objective_function_csr(matrix_aux)
+        if possible_upper <= upper_bound:
+            possible_optimum_matrix = copy.deepcopy(matrix_aux)
+            upper_bound = possible_upper
+            if upper_bound == lower_bound:
+                return matrix_aux
+            else:
+                matrix_aux = recursive_bnb(list_aux_copy, upper_bound, lower_bound, time_rec, matrix_aux)
+
             possible_upper = Af.objective_function_csr(matrix_aux)
             if possible_upper <= upper_bound:
                 upper_bound = possible_upper
                 if upper_bound == lower_bound:
                     return matrix_aux
-                else:
-                    matrix_aux = recursive_bnb(list_aux_copy, upper_bound, lower_bound, matrix_aux)
 
-                possible_upper = Af.objective_function_csr(matrix_aux)
-                if possible_upper <= upper_bound:
-                    upper_bound = possible_upper
-                    if upper_bound == lower_bound:
-                        return matrix_aux
+    return possible_optimum_matrix
+
+
+# def recursive_bnb(list_aux, upper_bound, lower_bound, matrix=csr_matrix):
+#     if len(list_aux) == 1:
+#         return matrix
+#     for x in list_aux:
+#
+#         list_aux_copy = []
+#         # list_aux_copy = copy.deepcopy(list_aux)
+#         print(len(list_aux))
+#         for i in range(x, len(list_aux)):
+#             print(x, i)
+#             list_aux_copy.append(i)
+#
+#         print(list_aux_copy)
+#         row = list_aux_copy.pop(list_aux_copy.index(x))
+#         print(list_aux_copy)
+#         for y in list_aux_copy:
+#             matrix_aux = copy.deepcopy(Af.swap_indices(row, y, matrix))
+#             possible_upper = Af.objective_function_csr(matrix_aux)
+#             if possible_upper <= upper_bound:
+#                 upper_bound = possible_upper
+#                 if upper_bound == lower_bound:
+#                     return matrix_aux
+#                 else:
+#                     matrix_aux = recursive_bnb(list_aux_copy, upper_bound, lower_bound, matrix_aux)
+#
+#                 possible_upper = Af.objective_function_csr(matrix_aux)
+#                 if possible_upper <= upper_bound:
+#                     upper_bound = possible_upper
+#                     if upper_bound == lower_bound:
+#                         return matrix_aux
+#
+#     return matrix
 
 # def bandwidth_bnb(matrix=csr_matrix):
 #     # bandwidth = Af.objective_function_csr(matrix)

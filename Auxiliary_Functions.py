@@ -5,7 +5,7 @@ from scipy.sparse import csgraph
 
 def objective_function_csr(matrix_fun=csr_matrix):
     bandwidth = 0
-    for row_for in range(0, (int(matrix_fun.get_shape()[0] - 1))):
+    for row_for in range(0, (int(matrix_fun.get_shape()[0]))):
         indices_aux = list(matrix_fun[row_for].indices)
         bandwidth_aux = int(indices_aux[len(indices_aux)-1]) - row_for
         if bandwidth_aux > bandwidth:
@@ -19,7 +19,8 @@ def bandwidth_row(row, matrix_fun=csr_matrix):
     return int(indices_aux[len(indices_aux) - 1]) - row
 
 
-def swap_indices(ind1, ind2, matrix_fun):
+def swap_indices(ind1, ind2, matrix):
+    matrix_fun = copy.deepcopy(matrix)
     for row_for in range((int(matrix_fun.get_shape()[0]))):
         if (row_for != ind1) and (row_for != ind2):
             if matrix_fun.__getitem__((ind1, row_for)) != matrix_fun.__getitem__((ind2, row_for)):
@@ -42,7 +43,7 @@ def upper_bound_rcm(matrix=csr_matrix):
     rcm = list(rcm)
     rcm.pop()
     for x in rcm:
-        swap_indices(list_aux.index(x), list_aux.index(cont), matrix_aux)
+        matrix_aux = swap_indices(list_aux.index(x), list_aux.index(cont), matrix_aux)
         list_aux[list_aux.index(x)], list_aux[list_aux.index(cont)] = \
             list_aux[list_aux.index(cont)], list_aux[list_aux.index(x)]
         cont += 1
