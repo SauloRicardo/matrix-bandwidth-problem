@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="73f91049-728e-49ea-acd1-b9265ba36ece" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/testesNiaPy.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/testesNiaPy.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Auxiliary_Functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/Auxiliary_Functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Branch_and_Bound.py" beforeDir="false" afterPath="$PROJECT_DIR$/Branch_and_Bound.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Test_Matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test_Matrix.py" afterDir="false" />
     </list>
@@ -51,6 +48,28 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.testMatrix">
+    <configuration name="exercicio_dic" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="testesNiaPy" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/matrizes" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/matrizes/exercicio_dic.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="soma_sequencia" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="testesNiaPy" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -120,6 +139,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.testMatrix" />
+        <item itemvalue="Python.exercicio_dic" />
         <item itemvalue="Python.soma_sequencia" />
         <item itemvalue="Python.test1" />
       </list>
@@ -151,7 +171,8 @@
       <workItem from="1574804378530" duration="8942000" />
       <workItem from="1574860631175" duration="9102000" />
       <workItem from="1574889313020" duration="944000" />
-      <workItem from="1574892126371" duration="22302000" />
+      <workItem from="1574892126371" duration="30389000" />
+      <workItem from="1575144666659" duration="2283000" />
     </task>
     <servers />
   </component>
@@ -191,7 +212,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/matrix_bandwidth_problem$soma_sequencia.coverage" NAME="soma_sequencia Coverage Results" MODIFIED="1573752832494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../../.." />
-    <SUITE FILE_PATH="coverage/matrix_bandwidth_problem$testMatrix.coverage" NAME="testMatrix Coverage Results" MODIFIED="1574967712912" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/matrix_bandwidth_problem$testMatrix.coverage" NAME="testMatrix Coverage Results" MODIFIED="1575088291708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/testesNiaPy$testMatrix.coverage" NAME="testMatrix Coverage Results" MODIFIED="1569449464758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/matrix_bandwidth_problem$exercicio_dic.coverage" NAME="exercicio_dic Coverage Results" MODIFIED="1575085140832" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/matrizes" />
   </component>
 </project>

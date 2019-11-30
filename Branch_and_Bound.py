@@ -26,7 +26,6 @@ def bandwidth_bnb(matrix=csr_matrix):
         list_aux.pop(0)
 
         time_rec2 = time.time() - time_rec
-        print(time_rec2)
         if time_rec2 >= 1800:
             return possible_optimum_matrix
 

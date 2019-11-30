@@ -6,6 +6,7 @@ import Auxiliary_Functions as Af
 import Branch_and_Bound as bnb
 import copy
 import random
+import time
 
 # row_full = np.array([0, 1, 2, 3, 4, 0, 0, 0, 0, 1, 2, 3, 4, 1, 1, 1, 2, 3, 4, 2, 2, 3, 4, 3, 4])
 # col_full = np.array([0, 1, 2, 3, 4, 1, 2, 3, 4, 0, 0, 0, 0, 2, 3, 4, 1, 1, 1, 3, 4, 2, 2, 4, 3])
@@ -33,24 +34,49 @@ import random
 # matrix_aux.setdiag(1)
 # matrix_aux.eliminate_zeros()
 
-tam = 25
-matrix_aux = csr_matrix((tam, tam), dtype=int)
-matrix_aux.setdiag(1)
-for x in range(0, tam):
-    for y in range(0, tam):
-        ran = random.randrange(0, 100)
-        if ran >= 96:
-            matrix_aux.__setitem__((x, y), 1)
-            matrix_aux.__setitem__((y, x), 1)
+tam = 10
+time_at = time.time()
+time_rec = time.time() - time_at
 
-print("opa")
-matrix_test = bnb.bandwidth_bnb(matrix_aux)
-# matrix_test = Af.swap_indices(0, 1, matrix_aux)
-print(matrix_test.toarray())
-print(Af.objective_function_csr(matrix_test))
+arq_log = "logs/log.txt"
+file = open(arq_log, "w")
+file.write("###############################################################################\n")
+file.write("########### Este é o log com as informações produzida pelo software ###########\n")
+file.write("###############################################################################\n\n")
+file.close()
 
-matrix_test = Af.upper_bound_rcm(matrix_aux)
-print(Af.objective_function_csr(matrix_test))
+while time_rec <= 28800:
+    print(time_rec)
+    matrix_aux = csr_matrix((tam, tam), dtype=int)
+    matrix_aux.setdiag(1)
+    for x in range(0, tam):
+        for y in range(0, tam):
+            ran = random.randrange(0, 100)
+            if ran >= 97:
+                matrix_aux.__setitem__((x, y), 1)
+                matrix_aux.__setitem__((y, x), 1)
+
+    matrix_test = bnb.bandwidth_bnb(matrix_aux)
+    time_rec += time.time() - time_at
+    # matrix_test = Af.swap_indices(0, 1, matrix_aux)
+    # print(matrix_test.toarray())
+    # print(Af.objective_function_csr(matrix_test))
+
+    file = open(arq_log, "a")
+    file.write("###############################################################################\n")
+    file.write("Matriz de tamanho : " + str(tam))
+    file.write("\n A matriz é original é : \n")
+    file.write(str(matrix_aux.toarray()))
+    file.write("\n\n A matriz após o bnb é : \n")
+    file.write(str(matrix_test.toarray()))
+    file.write("\n\n O tempo utilizado foi : \n")
+    file.write(str(time_rec))
+    file.write("\n\n###############################################################################\n\n")
+    file.close()
+
+    tam += 5
+
+
 # print(matrix_test.toarray())
 
 # matrix_aux = Af.upper_bound_rcm(matrix_test)
